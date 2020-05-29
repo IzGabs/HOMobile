@@ -23,11 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^0.5.7+3
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
+  
 
 dev_dependencies:
   flutter_test:
@@ -45,8 +47,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+   - images/terra.png
+   - images/planeta-verde.png
+  
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -60,12 +64,29 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: NunitoSans
+      fonts:
+        - asset: fonts/Nunito_Sans/NunitoSans-Regular.ttf
+        - asset: fonts/Nunito_Sans/NunitoSans-Italic.ttf
+          style: italic
+        - asset: fonts/Nunito_Sans/NunitoSans-Bold.ttf
+          weight: 800
+    - family: Kanit
+      fonts:
+        - asset: fonts/Kanit/Kanit-Regular.ttf
+        - asset: fonts/Kanit/Kanit-Italic.ttf
+          style: italic
+        - asset: fonts/Kanit/Kanit-Bold.ttf
+          weight: 800
+    - family: Balsamiq
+      fonts:
+        - asset: fonts/Balsamiq_Sans/BalsamiqSans-Regular.ttf
+        - asset: fonts/Balsamiq_Sans/BalsamiqSans-Italic.ttf
+          style: italic
+        - asset: fonts/Balsamiq_Sans/BalsamiqSans-Bold.ttf
+          weight: 800
+           
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
