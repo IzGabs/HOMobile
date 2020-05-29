@@ -5,4 +5,4 @@ O aplicativo foi construído usando Flutter,
 Para o backend estamos usando o Firebase.
 
 ## Página de Login
-![](https://i.imgur.com/ev2o9c2.png)
+<img src="https://i.imgur.com/ev2o9c2.png" width="200" height="400" />
