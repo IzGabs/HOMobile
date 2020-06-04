@@ -1,16 +1,8 @@
-# help_others
+# HELP OTHERS 
 
-A new Flutter project.
+O intuito do Help Others é fazer a ponte entre a pessoa que precisa de doações e uma outra pessoa que deseja doar alguma coisa.
+O aplicativo foi construído usando Flutter, 
+Para o backend estamos usando o Firebase.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Página de Login
+<img src="https://i.imgur.com/ev2o9c2.png" width="200" height="400" />
