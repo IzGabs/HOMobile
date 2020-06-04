@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ReusableWidgets/CommonsWidgetsMethods.dart';
+
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class Login extends StatelessWidget {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(20)),
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            ///TODO  Login, uso o SharedPreferences pra manter ele logado?
+            ///Caso precise manter ele logado, eu coloco mas nao sei se vai dar tempo (levando em conta o tempo até a entrega)
+            Navigator.popAndPushNamed(context, '/ClientHomePage');
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -106,109 +112,29 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _textFormFieldFactory(
+            textFormFieldFactory(
                 'Digite o seu email', 'Email', scrHeight, Icons.email, false),
-            _textFormFieldFactory(
+            textFormFieldFactory(
                 'Digite a sua senha', 'Senha', scrHeight, Icons.lock, true),
             _sendBtn,
             _regBtn
           ],
         ));
 
-    final topContent = Padding(
-      padding: EdgeInsets.only(top: 10.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          //Image
-          Image.asset(
-            'images/planeta-verde.png',
-            scale: 3,
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(top: 50.0),
-            child: ShaderMask(
-              blendMode: BlendMode.srcIn,
-              shaderCallback: (Rect bounds) {
-                return LinearGradient(
-                  colors: [Colors.blue, Colors.green],
-                ).createShader(bounds);
-              },
-              child: Text(
-                'Help Others',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 50,
-                    fontWeight: FontWeight.w800,
-                    fontFamily: 'Balsamiq'),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-
     // ------ Scaffold
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         body: ListView(
           children: <Widget>[
             //'HelpOthers' Text
-            topContent,
+            returnLogoApp(10.0, 3.0, 50),
             //Conteúdo
             _content,
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _textFormFieldFactory(String desc, String tipo, double scrHeight,
-      IconData icone, bool password) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      height: scrHeight * 0.10,
-      color: Colors.transparent,
-      child: Material(
-        elevation: 5.0,
-        shadowColor: Colors.black,
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(25.0),
-        child: TextFormField(
-          obscureText: password,
-          cursorColor: Colors.blue,
-          textAlign: TextAlign.start,
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              icone,
-              size: 15.0,
-              color: Colors.blue[600],
-            ),
-            labelText: '$tipo',
-            labelStyle: TextStyle(
-                letterSpacing: 3,
-                backgroundColor: Colors.transparent,
-                color: Colors.black54),
-            contentPadding:
-                new EdgeInsets.symmetric(vertical: 1.0, horizontal: 20.0),
-            alignLabelWithHint: true,
-            hintText: '$desc',
-            filled: true,
-            fillColor: Colors.white,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 1.4),
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue, width: 1.4),
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-          ),
         ),
       ),
     );

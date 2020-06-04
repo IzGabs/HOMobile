@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/Clients/View/ClientHome.dart';
 
 import 'login.dart';
 
@@ -10,13 +11,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: new ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.blue,
-          primaryColor: Colors.orange,
-        ),
-        routes: {'/Login': (context) => Login()},
-        home: Login());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          backgroundColor: Colors.grey.shade100,
+          primaryColor: Colors.blue,
+          primaryColorLight: Colors.green,
+          iconTheme: IconThemeData(color: Colors.green),
+          textSelectionColor: Colors.black),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.black,
+        primaryColor: Colors.green,
+        textSelectionColor: Colors.white,
+      ),
+      routes: {
+        '/Login': (context) => Login(),
+        '/ClientHomePage': (context) => PefilHome(),
+      },
+      home: PefilHome(),
+    );
+    // home: Login());
   }
 
   _factoryCreateCard(texto) {

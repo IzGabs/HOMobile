@@ -50,6 +50,8 @@ flutter:
   assets:
    - images/terra.png
    - images/planeta-verde.png
+   - images/medical-mask.png
+   - images/woman.png
   
   #   - images/a_dot_ham.jpeg
 
