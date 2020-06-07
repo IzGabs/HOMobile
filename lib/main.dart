@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/Login': (context) => Login(),
-        '/ClientHomePage': (context) => PefilHome(),
+        '/ClientHomePage': (context) => PerfilHome(),
         '/HomeCadastro': (context) => HomeCadastro(),
         '/DrawerDraw' : (context) => DrawerDraw(),
       },
-      home: PefilHome(),
+      home: PerfilHome(),
     );
     // home: Login());
   }
