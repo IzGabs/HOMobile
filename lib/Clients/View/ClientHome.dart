@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
-class PefilHome extends StatelessWidget {
-  const PefilHome({Key key}) : super(key: key);
+class PerfilHome extends StatelessWidget {
+  const PerfilHome({Key key}) : super(key: key);
 
   /// TODO colocar os campos obrigatórios que ele precisa passa pra acessar essa tela
 
   @override
   Widget build(BuildContext context) {
     final widthScreen = MediaQuery.of(context).size.width;
-    final heightScreen = MediaQuery.of(context).size.height;
 
     final _imageInfo = Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -46,12 +44,31 @@ class PefilHome extends StatelessWidget {
       ],
     );
 
-    final _imageUser = Container(
-      margin: EdgeInsets.all(40),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      height: 100,
-      width: double.infinity,
-      child: Image.asset('images/woman.png'),
+    final _imageUser = Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.all(40.0),
+          child: Image.asset(
+            'images/woman.png',
+            alignment: Alignment.centerLeft,
+            fit: BoxFit.fill,
+            scale: 5,
+          ),
+        ),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: widthScreen / 1.5),
+          child: Text(
+            'EcoNews',
+            style: TextStyle(
+                color: Theme.of(context).textSelectionColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w800,
+                fontFamily: 'Balsamiq'),
+          ),
+        ),
+      ],
     );
 
     return Scaffold(
@@ -85,8 +102,12 @@ class PefilHome extends StatelessWidget {
       body: ListView(
         children: [
           SizedBox(height: 50),
+          ////
           _imageInfo,
+          //
           _imageUser,
+          SizedBox(height: 50),
+          //
           _generateContainer(Colors.green),
           _generateContainer(Colors.yellow),
           _generateContainer(Colors.blue),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/Clients/View/AlterarDados.dart';
 import 'package:help_others/Clients/View/ClientHome.dart';
 
 import 'login.dart';
@@ -26,9 +27,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/Login': (context) => Login(),
-        '/ClientHomePage': (context) => PefilHome(),
+        '/ClientHomePage': (context) => PerfilHome(),
+        '/AlterarDados': (context) => AlterarDados(),
       },
-      home: PefilHome(),
+      home: AlterarDados(),
     );
     // home: Login());
   }
