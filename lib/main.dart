@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/Clients/View/ClientHome.dart';
 
+import 'Clients/View/Cadastro.dart';
+import 'HomeCadastro.dart';
+import 'ReusableWidgets/DrawerDraw.dart';
 import 'login.dart';
 
 void main() {
@@ -27,6 +30,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/Login': (context) => Login(),
         '/ClientHomePage': (context) => PefilHome(),
+        '/HomeCadastro': (context) => HomeCadastro(),
+        '/DrawerDraw' : (context) => DrawerDraw(),
       },
       home: PefilHome(),
     );

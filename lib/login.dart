@@ -127,7 +127,6 @@ class Login extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         body: ListView(
           children: <Widget>[
             //'HelpOthers' Text
