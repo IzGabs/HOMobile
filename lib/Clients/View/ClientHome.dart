@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
+import 'dart:ui' show ImageFilter;
 
 class PerfilHome extends StatelessWidget {
   const PerfilHome({Key key}) : super(key: key);
@@ -75,7 +77,13 @@ class PerfilHome extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
-      drawer: Drawer(),
+        drawer: Theme(
+            data: Theme.of(context).copyWith(
+              // Set the transparency here
+              canvasColor: Theme.of(context).backgroundColor, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
+            ),
+            child: DrawerDraw(),
+        ),
       appBar: AppBar(
         leading: Builder(
           builder: (BuildContext context) {
