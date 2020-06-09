@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/Clients/View/ClientHome.dart';
 
-import 'Clients/View/Cadastro.dart';
+import './Clients/View/AlterarDados.dart';
+import './Clients/View/DoacaoMonetaria.dart';
+import './Clients/View/PontosDeColeta.dart';
 import 'HomeCadastro.dart';
 import 'ReusableWidgets/DrawerDraw.dart';
 import 'login.dart';
@@ -31,9 +33,11 @@ class MyApp extends StatelessWidget {
         '/Login': (context) => Login(),
         '/ClientHomePage': (context) => PerfilHome(),
         '/HomeCadastro': (context) => HomeCadastro(),
-        '/DrawerDraw' : (context) => DrawerDraw(),
+        '/DrawerDraw': (context) => DrawerDraw(),
+        '/AlterarDados': (context) => AlterarDados(),
+        '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
       },
-      home: PerfilHome(),
+      home: PontosDeColeta(),
     );
     // home: Login());
   }

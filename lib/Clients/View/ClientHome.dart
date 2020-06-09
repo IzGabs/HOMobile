@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
 class PerfilHome extends StatelessWidget {
@@ -76,29 +77,7 @@ class PerfilHome extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       drawer: Drawer(),
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Colors.green,
-              ),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        centerTitle: true,
-        title: LinearGradientItens(
-            child: Text(
-          'HelpOthers HomePage',
-          style: TextStyle(color: Colors.white),
-        )),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: appBarTransparente('HelpOthers HomePage'),
       body: ListView(
         children: [
           SizedBox(height: 50),

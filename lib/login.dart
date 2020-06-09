@@ -130,7 +130,7 @@ class Login extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             //'HelpOthers' Text
-            returnLogoApp(10.0, 3.0, 50),
+            returnLogoApp(10.0, 3.0, 50, needTitle: true),
             //Conteúdo
             _content,
           ],

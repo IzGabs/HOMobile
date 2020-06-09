@@ -54,33 +54,10 @@ class _AlterarDadosState extends State<AlterarDados> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Colors.green,
-              ),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        centerTitle: true,
-        title: LinearGradientItens(
-            child: Text(
-          'Alterar Dados',
-          style: TextStyle(color: Colors.white),
-        )),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      drawer: Drawer(),
+      appBar: appBarTransparente('Alterar Dados'),
       body: ListView(
         children: [
-          returnLogoApp(10.0, 5.0, 25, paddingTitle: 10),
+          returnLogoApp(10.0, 5.0, 25, paddingTitle: 10, needTitle: true),
           SizedBox(height: 50),
 
           /// TODO adicionar imagem do usuário [Bloco de imagem provisorio]
