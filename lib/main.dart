@@ -36,8 +36,9 @@ class MyApp extends StatelessWidget {
         '/DrawerDraw': (context) => DrawerDraw(),
         '/AlterarDados': (context) => AlterarDados(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
+        '/PontosDeColeta': (context) => PontosDeColeta(),
       },
-      home: PontosDeColeta(),
+      home: Login(),
     );
     // home: Login());
   }

@@ -15,28 +15,28 @@ Widget returnLogoApp(double marginTop, double imageScale, double fontSizeTitle,
           scale: imageScale,
         ),
         //
-        needTitle ??
-            Offstage() ??
-            Padding(
-              padding:
-                  EdgeInsets.only(top: paddingTitle ?? 50.0 ?? paddingTitle),
-              child: ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (Rect bounds) {
-                  return LinearGradient(
-                    colors: [Colors.blue, Colors.green],
-                  ).createShader(bounds);
-                },
-                child: Text(
-                  'Help Others',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: fontSizeTitle,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'Balsamiq'),
+        needTitle == null
+            ? Offstage()
+            : Padding(
+                padding:
+                    EdgeInsets.only(top: paddingTitle ?? 50.0 ?? paddingTitle),
+                child: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) {
+                    return LinearGradient(
+                      colors: [Colors.blue, Colors.green],
+                    ).createShader(bounds);
+                  },
+                  child: Text(
+                    'Help Others',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: fontSizeTitle,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: 'Balsamiq'),
+                  ),
                 ),
               ),
-            ),
       ],
     ),
   );

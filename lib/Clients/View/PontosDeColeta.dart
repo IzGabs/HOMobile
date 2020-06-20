@@ -47,15 +47,16 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
           // ListView.builder(itemBuilder: )
           Column(
             children: [
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
-              _generateContainer(Colors.grey),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
+              _generateContainer(Colors.grey.shade300),
             ],
           ),
         ],
@@ -65,9 +66,9 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
 
   Container _generateContainer(color) {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
       decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(10)),
       height: 100,
       width: double.infinity,
     );
