@@ -1,53 +1,105 @@
 import 'package:flutter/material.dart';
 
+import 'GradientWidgets.dart';
 
-class DrawerDraw extends StatelessWidget {
+const String _AccountName = 'Essa app ta uma caquita';
+const String _AccountEmail = 'ProfJulianaPFFF@MEDA10.com';
+const String _AccountAbbr = 'ZuLul';
+
+class DrawerDraw extends Drawer{
+
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 15,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           _createHeader(),
           _createDrawerItem(
             icon: Icons.contacts,
-            text: 'Contacts',
+            text: 'Gerenciar Doação',
             onTap: () =>
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DrawerDraw()),
-                ),
+            ///TODO CRIAR REDIRECIONAMENTO PARA GERENCIAR DOAÇÃO
+            Navigator.pushNamed(context, '/ClientHomePage'),
           ),
           _createDrawerItem(
             icon: Icons.event,
-            text: 'Events',
+            text: 'Analisar Perfil',
             onTap: () =>
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DrawerDraw()),
-                ),
+            ///TODO CRIAR REDIRECIONAMENTO PARA ANALISAR PERFIL
+            Navigator.pushNamed(context, '/ClientHomePage'),
           ),
           _createDrawerItem(
             icon: Icons.note,
-            text: 'Notes',
+            text: 'Verificar Benefício',
             onTap: () =>
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DrawerDraw()),
-                ),
+            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR BENEFÍCIO
+            Navigator.pushNamed(context, '/ClientHomePage'),
           ),
-          Divider(),
-          _createDrawerItem(icon: Icons.collections_bookmark, text: 'Steps'),
-          _createDrawerItem(icon: Icons.face, text: 'Authors'),
+          LinearGradientItens(
+            child: Divider(
+              thickness: 2,
+              color: Colors.green,
+            ),
+          ),
           _createDrawerItem(
-              icon: Icons.account_box, text: 'Flutter Documentation'),
-          _createDrawerItem(icon: Icons.stars, text: 'Useful Links'),
-          Divider(),
-          _createDrawerItem(icon: Icons.bug_report, text: 'Report an issue'),
-          ListTile(
-            title: Text('0.0.1'),
-            onTap: () {},
+            icon: Icons.event,
+            text: 'Pontos de Coleta',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA PONTOS DE COLETA
+            Navigator.pushNamed(context, '/ClientHomePage'),
           ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Historico',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA HISTORICO
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Verificar Doador',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR DOADOR
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Verificar Receptor',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR RECEPTOR
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          LinearGradientItens(
+            child: Divider(
+              thickness: 2,
+              color: Colors.green,
+            ),
+          ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Verificar Ranking',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA RANKING
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Mais Novidades',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA MAIS NOVIDADES
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          _createDrawerItem(
+            icon: Icons.event,
+            text: 'Descrição',
+            onTap: () =>
+            ///TODO CRIAR REDIRECIONAMENTO PARA DESCRIÇÃO
+            Navigator.pushNamed(context, '/ClientHomePage'),
+          ),
+          _createDrawerItem(icon: Icons.bug_report, text: 'Reportar Bugs'),
         ],
       ),
     );
@@ -57,19 +109,31 @@ class DrawerDraw extends StatelessWidget {
     return DrawerHeader(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/lol.PNG'))),
         child: Stack(children: <Widget>[
-          Positioned(
-              bottom: 12.0,
-              left: 16.0,
-              child: Text("Flutter Step-by-Step",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500))),
+          new UserAccountsDrawerHeader(
+            accountName: const Text(_AccountName),
+            accountEmail: const Text(_AccountEmail),
+            currentAccountPicture: new CircleAvatar(
+                backgroundColor: Colors.black,
+                child: new Text(_AccountAbbr)
+            ),
+            otherAccountsPictures: <Widget>[
+              new GestureDetector(
+                //onTap: () => _onTapOtherAccounts(context),
+                child: new Semantics(
+                  label: 'Muda Conta',
+                  child: new CircleAvatar(
+                    backgroundColor: Colors.black,
+                    child: new Text('LuL'),
+                  ),
+                ),
+              ),
+            ],
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage('images/tela.jpg'))),
+          ),
         ]));
   }
 
@@ -88,4 +152,16 @@ class DrawerDraw extends StatelessWidget {
       onTap: onTap,
     );
   }
+
+  @override
+  // TODO: implement child
+  Widget get child => throw UnimplementedError();
+
+  @override
+  // TODO: implement elevation
+  double get elevation => throw UnimplementedError();
+
+  @override
+  // TODO: implement semanticLabel
+  String get semanticLabel => throw UnimplementedError();
 }
