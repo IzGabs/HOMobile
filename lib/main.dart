@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/Clients/View/Beneficios.dart';
 import 'package:help_others/Clients/View/ClientHome.dart';
 
 import './Clients/View/AlterarDados.dart';
 import './Clients/View/DoacaoMonetaria.dart';
 import './Clients/View/PontosDeColeta.dart';
+import 'Clients/View/DoacaoEfetiva.dart';
+import 'Clients/View/DoacaoGeral.dart';
 import 'HomeCadastro.dart';
 import 'ReusableWidgets/DrawerDraw.dart';
 import 'login.dart';
@@ -31,15 +34,18 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/Login': (context) => Login(),
+        '/Beneficios': (context) => Beneficios(),
+        '/DoacaoGeral': (context) => DoacaoGeral(),
+        '/DoacaoEfetiva': (context) => DoacaoEfetiva(),
+        '/PontosDeColeta': (context) => PontosDeColeta(),
         '/ClientHomePage': (context) => PerfilHome(),
         '/HomeCadastro': (context) => HomeCadastro(),
         '/DrawerDraw': (context) => DrawerDraw(),
         '/AlterarDados': (context) => AlterarDados(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
       },
-      home: PontosDeColeta(),
+      home: Beneficios(),
     );
-    // home: Login());
   }
 
   _factoryCreateCard(texto) {
