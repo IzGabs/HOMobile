@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:simple_animations/simple_animations.dart';
 import 'ReusableWidgets/CommonsWidgetsMethods.dart';
 
 class Login extends StatelessWidget {
@@ -121,6 +121,84 @@ class Login extends StatelessWidget {
           ],
         ));
 
+
+    // ignore: deprecated_member_use
+    final tween = MultiTrackTween([
+      Track("color1").add(Duration(seconds: 5),
+          ColorTween(begin: Colors.black, end: Colors.blue)),
+      Track("color2").add(Duration(seconds: 5),
+          ColorTween(begin: Colors.green, end: Colors.black))
+    ]);
+
+
+
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
+        body: Container(
+          // ignore: deprecated_member_use
+          child: ControlledAnimation(
+            playback: Playback.MIRROR,
+            tween: tween,
+            duration: tween.duration,
+            builder: (context, animation) {
+              return Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [animation["color2"], animation["color1"]])),
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: ListView(
+                    children: <Widget>[
+                      returnLogoApp(10.0, 3.0, 50, needTitle: null),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding:
+                          EdgeInsets.only(top: 50),
+                          child: ShaderMask(
+                            blendMode: BlendMode.srcIn,
+                            shaderCallback: (Rect bounds) {
+                              return LinearGradient(
+                                colors: [Colors.blue, Colors.green],
+                              ).createShader(bounds);
+                            },
+                            child: Text(
+                              'Help Others',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w800,
+                                  fontFamily: 'Balsamiq'),
+                            ),
+                          ),
+                        ),
+                      ),
+                      //Conteúdo
+                      _content,
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+/*
+
     // ------ Scaffold
     return SafeArea(
       child: Scaffold(
@@ -139,7 +217,7 @@ class Login extends StatelessWidget {
     );
   }
 }
-
+*/
 // floatingActionButton: ShaderMask(
 //           shaderCallback: (Rect bounds) {
 //             return LinearGradient(
