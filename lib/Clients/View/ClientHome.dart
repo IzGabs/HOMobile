@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
+import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
 class PerfilHome extends StatelessWidget {
@@ -73,11 +74,23 @@ class PerfilHome extends StatelessWidget {
     );
 
     return Scaffold(
+      drawer: DrawerDraw(),
       backgroundColor: Theme.of(context).backgroundColor,
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
-      drawer: Drawer(),
-      appBar: appBarTransparente('HelpOthers HomePage'),
+      appBar: new AppBar(
+        actions: [
+          LinearGradientItens(child: IconButton(icon: Icon(Icons.settings), onPressed: (){ Navigator.pushNamed(context, '/AlterDado');}, color: Colors.blue, iconSize: 35,))
+        ],
+        centerTitle: true,
+        title: LinearGradientItens(
+            child: Text(
+              'Home',
+              style: TextStyle(color: Colors.white),
+            )
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: ListView(
         children: [
           SizedBox(height: 50),

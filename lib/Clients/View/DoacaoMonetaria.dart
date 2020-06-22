@@ -58,7 +58,7 @@ class _DoacaoMonetariaState extends State<DoacaoMonetaria> {
       body: Form(
         child: ListView(
           children: [
-            returnLogoApp(10.0, 5.0, 25, paddingTitle: 10, needTitle: true),
+            returnLogoApp(10.0, 5.0, 25, true, paddingTitle: 10),
             SizedBox(height: 30),
             textFormFieldFactory('Numero do Cartão', 'Num. Cartão', scrHeight,
                 Icons.credit_card, false,
