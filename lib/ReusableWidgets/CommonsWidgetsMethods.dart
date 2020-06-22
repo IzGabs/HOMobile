@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'DrawerDraw.dart';
 import 'GradientWidgets.dart';
 
-Widget returnLogoApp(double marginTop, double imageScale, double fontSizeTitle,
-    {double paddingTitle, bool needTitle}) {
+Widget returnLogoApp(double marginTop, double imageScale, double fontSizeTitle,bool needTitle,
+    {double paddingTitle}) {
   return Padding(
     padding: EdgeInsets.only(top: marginTop),
     child: Column(
@@ -16,8 +16,9 @@ Widget returnLogoApp(double marginTop, double imageScale, double fontSizeTitle,
           scale: imageScale,
         ),
         //
-        needTitle ??
-            Offstage() ??
+
+        !needTitle ?
+            Offstage():
             Padding(
               padding:
                   EdgeInsets.only(top: paddingTitle ?? 50.0 ?? paddingTitle),

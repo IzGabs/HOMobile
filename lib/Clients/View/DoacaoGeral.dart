@@ -48,6 +48,7 @@ class ToDoListState extends State<DoacaoGeral> {
           overlayColor: Colors.black,
           children: [
             SpeedDialChild(
+               ///Todo ROUTE PRA DOAÇÃO EFETIVA
               child: Icon(Icons.monetization_on),
               labelBackgroundColor: Colors.black87,
               label: 'Doação Monetária',
@@ -56,6 +57,7 @@ class ToDoListState extends State<DoacaoGeral> {
               foregroundColor: Colors.black,
             ),
             SpeedDialChild(
+              ///Todo ROUTE PRA DOAÇÃO MONETARIA
               child: Icon(Icons.check),
               labelBackgroundColor: Colors.black87,
               label: "Doação Padrão",
