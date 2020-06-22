@@ -66,7 +66,9 @@ class Login extends StatelessWidget {
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(20)),
               color: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/HomeCadastro');
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -121,7 +123,6 @@ class Login extends StatelessWidget {
           ],
         ));
 
-
     // ignore: deprecated_member_use
     final tween = MultiTrackTween([
       Track("color1").add(Duration(seconds: 5),
@@ -129,9 +130,6 @@ class Login extends StatelessWidget {
       Track("color2").add(Duration(seconds: 5),
           ColorTween(begin: Colors.green, end: Colors.black))
     ]);
-
-
-
 
     return SafeArea(
       child: Scaffold(
@@ -156,29 +154,6 @@ class Login extends StatelessWidget {
                   child: ListView(
                     children: <Widget>[
                       returnLogoApp(10.0, 3.0, 50, true),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding:
-                          EdgeInsets.only(top: 50),
-                          child: ShaderMask(
-                            blendMode: BlendMode.srcIn,
-                            shaderCallback: (Rect bounds) {
-                              return LinearGradient(
-                                colors: [Colors.blue, Colors.green],
-                              ).createShader(bounds);
-                            },
-                            child: Text(
-                              'Help Others',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.w800,
-                                  fontFamily: 'Balsamiq'),
-                            ),
-                          ),
-                        ),
-                      ),
                       //Conteúdo
                       _content,
                     ],
@@ -192,10 +167,6 @@ class Login extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 /*
 

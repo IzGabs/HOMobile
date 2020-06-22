@@ -15,6 +15,8 @@ void main() {
   runApp(MyApp());
 }
 
+const pathAPI = 'http://10.0.2.2:8000/';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,15 +51,15 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  _factoryCreateCard(texto) {
-    return Card(
-      margin: EdgeInsets.all(10),
-      color: Colors.white,
-      elevation: 10,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Text('$texto'),
-      ),
-    );
-  }
+  // _factoryCreateCard(texto) {
+  //   return Card(
+  //     margin: EdgeInsets.all(10),
+  //     color: Colors.white,
+  //     elevation: 10,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(20.0),
+  //       child: Text('$texto'),
+  //     ),
+  //   );
+  // }
 }

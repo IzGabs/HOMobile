@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'package:help_others/Clients/Controller/ClientController.dart';
 import '../../ReusableWidgets/GradientWidgets.dart';
+
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _validate = false;
 String variavel;
 bool emailtest = false;
 
-
 class Cadastro extends StatefulWidget {
   const Cadastro({Key key}) : super(key: key);
-
 
   @override
   _CadastroState createState() => _CadastroState();
 }
 
 class _CadastroState extends State<Cadastro> {
-  bool _agreedToTOS = true;
+  TextEditingController _user = new TextEditingController();
+  TextEditingController _nome = new TextEditingController();
+  TextEditingController _sobrenome = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _senha = new TextEditingController();
+  TextEditingController _endereco = new TextEditingController();
 
+  bool _agreedToTOS = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,89 +35,86 @@ class _CadastroState extends State<Cadastro> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _textFormFieldFactory(
-                'Usuário', Icons.person, false, emailtest, variavel),
+                'Usuário', Icons.person, false, emailtest, variavel, _user),
             _textFormFieldFactory(
-                'Nome', Icons.person, false, emailtest, variavel),
+                'Nome', Icons.person, false, emailtest, variavel, _nome),
+            _textFormFieldFactory('Sobrenome', Icons.person_add, false,
+                emailtest, variavel, _sobrenome),
             _textFormFieldFactory(
-                'Sobrenome', Icons.person_add, false, emailtest, variavel),
+                'E-mail', Icons.email, false, true, variavel, _email),
             _textFormFieldFactory(
-                'E-mail', Icons.email, false, true, variavel),
-            _textFormFieldFactory(
-                'Senha', Icons.lock_outline, true, emailtest, variavel),
-            _textFormFieldFactory(
-                'Endereço', Icons.location_on, false, emailtest, variavel),
+                'Senha', Icons.lock_outline, true, emailtest, variavel, _senha),
+            _textFormFieldFactory('Endereço', Icons.location_on, false,
+                emailtest, variavel, _endereco),
           ],
-        )
-    );
+        ));
 
     return Form(
-        key: _formKey,
-        autovalidate: _validate,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _content,
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0.0),
-              child: Row(
-                children: <Widget>[
-                  Checkbox(
-                    value: _agreedToTOS,
-                    onChanged: _setAgreedToTOS,
+      key: _formKey,
+      autovalidate: _validate,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          //
+          _content,
+          //
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0),
+            child: Row(
+              children: <Widget>[
+                Checkbox(
+                  value: _agreedToTOS,
+                  onChanged: _setAgreedToTOS,
+                ),
+                GestureDetector(
+                  onTap: () => _setAgreedToTOS(!_agreedToTOS),
+                  child: const Text(
+                    'Eu concordo com os Termos de serviço',
                   ),
-                  GestureDetector(
-                    onTap: () => _setAgreedToTOS(!_agreedToTOS),
-                    child: const Text(
-                      'Eu concordo com os Termos de serviço',
-                    ),
-                  ),
-                ],
-
-              ),
+                ),
+              ],
             ),
-            new Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              child: Column(
-                children: [
+          ),
+          new Padding(
+            padding: EdgeInsets.symmetric(horizontal: 60),
+            child: Column(
+              children: [
                 LinearGradientItens(
-                    child: RaisedButton(
-                      elevation: 5,
-                      shape: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(20)),
-                      color: Colors.white,
-
-                      onPressed: _submittable()? _sendForm: null,
-
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Spacer(),
-                          Text(
-                            'Concluir',
-                            style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 5,
-                            ),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.add,
+                  child: RaisedButton(
+                    elevation: 5,
+                    shape: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Colors.white,
+                    onPressed: _submittable() ? _sendForm : null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Spacer(),
+                        Text(
+                          'Concluir',
+                          style: TextStyle(
                             color: Colors.black,
-                            size: 15,
+                            letterSpacing: 5,
                           ),
-                        ],
-                      ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.add,
+                          color: Colors.black,
+                          size: 15,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
-
 
   bool _submittable() {
     return _agreedToTOS;
@@ -129,8 +131,20 @@ class _CadastroState extends State<Cadastro> {
       // Sem erros na validação
       _formKey.currentState.save();
       _validate = true;
+
+      ClientController()
+          .postRegUser(_user.text, _nome.text, _sobrenome.text, _email.text,
+              _senha.text, _endereco.text)
+          .then((value) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text(value),
+          ),
+        );
+      });
+
       ///TODO ADICIONAR FUNÇÃO DE CADASTRO E RETORNO BACK END
-      Navigator.pushNamed(context, '/ClientHomePage');
+      //   Navigator.pushNamed(context, '/ClientHomePage');
     } else {
       // erro de validação
       setState(() {
@@ -140,11 +154,8 @@ class _CadastroState extends State<Cadastro> {
   }
 }
 
-
-
-
-Widget _textFormFieldFactory(String tipo,
-    IconData icone, bool password, bool emailtest, variavel) {
+Widget _textFormFieldFactory(String tipo, IconData icone, bool password,
+    bool emailtest, variavel, TextEditingController controller) {
   return new Container(
     padding: EdgeInsets.all(16),
     color: Colors.transparent,
@@ -155,6 +166,7 @@ Widget _textFormFieldFactory(String tipo,
       borderRadius: BorderRadius.circular(15.0),
       child: TextFormField(
         obscureText: password,
+        controller: controller,
         cursorColor: Colors.blue,
         textAlign: TextAlign.start,
         decoration: InputDecoration(
@@ -168,7 +180,8 @@ Widget _textFormFieldFactory(String tipo,
               letterSpacing: 3,
               backgroundColor: Colors.transparent,
               color: Colors.black54),
-          contentPadding: new EdgeInsets.symmetric(vertical: 1.0, horizontal: 15.0),
+          contentPadding:
+              new EdgeInsets.symmetric(vertical: 1.0, horizontal: 15.0),
           alignLabelWithHint: true,
           filled: true,
           fillColor: Colors.white,
@@ -181,13 +194,13 @@ Widget _textFormFieldFactory(String tipo,
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        validator: (String value){
-          String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        validator: (String value) {
+          String pattern =
+              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
           RegExp regExp = new RegExp(pattern);
-          if(value.isEmpty){
+          if (value.isEmpty) {
             return '$tipo obrigatório';
-          }
-          else if(emailtest == true && !regExp.hasMatch(value)){
+          } else if (emailtest == true && !regExp.hasMatch(value)) {
             return 'E-mail inválido';
           }
           return null;
@@ -199,6 +212,3 @@ Widget _textFormFieldFactory(String tipo,
     ),
   );
 }
-
-
-
