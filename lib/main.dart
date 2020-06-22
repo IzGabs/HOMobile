@@ -7,6 +7,7 @@ import './Clients/View/DoacaoMonetaria.dart';
 import './Clients/View/PontosDeColeta.dart';
 import 'Clients/View/DoacaoEfetiva.dart';
 import 'Clients/View/DoacaoGeral.dart';
+import 'Clients/View/ListarDonates.dart';
 import 'HomeCadastro.dart';
 import 'ReusableWidgets/DrawerDraw.dart';
 import 'login.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/AlterDado': (context) => AlterDado(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
       },
-      home: Login(),
+      home: ListDonate(),
     );
   }
 

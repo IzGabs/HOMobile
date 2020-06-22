@@ -14,11 +14,22 @@ class DoacaoGeral extends StatefulWidget {
 
 class ToDoListState extends State<DoacaoGeral> {
   List<TaskModel> taskList = [
-    TaskModel(id: '1', title: 'Item 1', status: 'Não-Perecível/Outros', name: 'Camisa'),
-    TaskModel(id: '2', title: 'Item 2', status: 'Não-Perecível/Outros', name: 'Jeans'),
-    TaskModel(id: '3', title: 'Item 3', status: 'Perecível', name: 'Lanchinho da Madrugada')
+    TaskModel(
+        id: '1',
+        title: 'Item 1',
+        status: 'Não-Perecível/Outros',
+        name: 'Camisa'),
+    TaskModel(
+        id: '2',
+        title: 'Item 2',
+        status: 'Não-Perecível/Outros',
+        name: 'Jeans'),
+    TaskModel(
+        id: '3',
+        title: 'Item 3',
+        status: 'Perecível',
+        name: 'Lanchinho da Madrugada')
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,48 +39,57 @@ class ToDoListState extends State<DoacaoGeral> {
       resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         actions: [
-          LinearGradientItens(child: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){ Navigator.pushNamed(context, '/ClientHomePage');}, color: Colors.blue, iconSize: 35,))
+          LinearGradientItens(
+              child: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/ClientHomePage');
+            },
+            color: Colors.blue,
+            iconSize: 35,
+          ))
         ],
         centerTitle: true,
         title: LinearGradientItens(
             child: Text(
-              'Listagem de Produtos',
-              style: TextStyle(color: Colors.white),
-            )
-        ),
+          'Listagem de Produtos',
+          style: TextStyle(color: Colors.white),
+        )),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: buildBody(),
       floatingActionButton: SpeedDial(
         curve: Curves.bounceOut,
-          backgroundColor: Colors.blue,
-          animatedIcon: AnimatedIcons.menu_close,
-          overlayColor: Colors.black,
-          children: [
-            SpeedDialChild(
-               ///Todo ROUTE PRA DOAÇÃO EFETIVA
-              child: Icon(Icons.monetization_on),
-              labelBackgroundColor: Colors.black87,
-              label: 'Doação Monetária',
-              labelStyle: TextStyle(fontSize: 18.0),
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.black,
-            ),
-            SpeedDialChild(
-              ///Todo ROUTE PRA DOAÇÃO MONETARIA
-              child: Icon(Icons.check),
-              labelBackgroundColor: Colors.black87,
-              label: "Doação Padrão",
-              labelStyle: TextStyle(fontSize: 18.0),
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.black,
-            ),
-          ],
-        ),
+        backgroundColor: Colors.blue,
+        animatedIcon: AnimatedIcons.menu_close,
+        overlayColor: Colors.black,
+        children: [
+          SpeedDialChild(
+            ///Todo ROUTE PRA DOAÇÃO EFETIVA
+            child: Icon(Icons.monetization_on),
+            labelBackgroundColor: Colors.black87,
+            label: 'Doação Monetária',
+            labelStyle: TextStyle(fontSize: 18.0),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.black,
+          ),
+          SpeedDialChild(
+            ///Todo ROUTE PRA DOAÇÃO MONETARIA
+            child: Icon(Icons.check),
+            labelBackgroundColor: Colors.black87,
+            label: "Doação Padrão",
+            labelStyle: TextStyle(fontSize: 18.0),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.black,
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white12,
-        child: Container(height: 50.0,),
+        child: Container(
+          height: 50.0,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
@@ -153,8 +173,7 @@ class ToDoListState extends State<DoacaoGeral> {
     return Container(
         key: Key(todo.id),
         margin: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
+        decoration: BoxDecoration(shape: BoxShape.rectangle,
             //color: const Color(0xFF66BB6A),
             boxShadow: [
               BoxShadow(
@@ -185,8 +204,7 @@ class ToDoListState extends State<DoacaoGeral> {
               ),
             )
           ],
-        )
-    );
+        ));
   }
 
   Widget buildBody() {
@@ -194,7 +212,6 @@ class ToDoListState extends State<DoacaoGeral> {
       children: taskList.map((todo) {
         return toDo(todo);
       }).toList(),
-
       onReorder: _onReorder,
     );
   }
@@ -208,7 +225,7 @@ class TaskModel {
 
   TaskModel(
       {@required this.id,
-        @required this.title,
-        @required this.status,
-        @required this.name});
+      @required this.title,
+      @required this.status,
+      @required this.name});
 }
