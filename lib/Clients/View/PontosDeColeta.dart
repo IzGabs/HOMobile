@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
+import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
+import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
 class PontosDeColeta extends StatefulWidget {
   @override
@@ -12,11 +14,26 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
     final double scrHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      drawer: DrawerDraw(),
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: appBarTransparente('Pontos de coleta'),
+      resizeToAvoidBottomInset: false,
+      appBar: new AppBar(
+        actions: [
+          LinearGradientItens(child: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){ Navigator.pushNamed(context, '/ClientHomePage');}, color: Colors.blue, iconSize: 35,))
+        ],
+        centerTitle: true,
+        title: LinearGradientItens(
+            child: Text(
+              'Listagem de Produtos',
+              style: TextStyle(color: Colors.white),
+            )
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: ListView(
         children: [
-          returnLogoApp(10.0, 5.0, 25, paddingTitle: 10),
+          returnLogoApp(10.0, 5.0, 25,true  ,paddingTitle: 10, ),
           textFormFieldFactory(
             'Onde você está? ',
             'Pesquisar Locais proximos',

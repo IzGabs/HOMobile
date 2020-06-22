@@ -155,7 +155,7 @@ class Login extends StatelessWidget {
                   padding: EdgeInsets.all(16.0),
                   child: ListView(
                     children: <Widget>[
-                      returnLogoApp(10.0, 3.0, 50, needTitle: null),
+                      returnLogoApp(10.0, 3.0, 50, true),
                       Align(
                         alignment: Alignment.center,
                         child: Padding(

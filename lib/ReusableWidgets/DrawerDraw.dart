@@ -36,7 +36,7 @@ class DrawerDraw extends Drawer{
             text: 'Verificar Benefício',
             onTap: () =>
             ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR BENEFÍCIO
-            Navigator.pushNamed(context, '/ClientHomePage'),
+            Navigator.pushNamed(context, '/Beneficios'),
           ),
           LinearGradientItens(
             child: Divider(
@@ -49,7 +49,7 @@ class DrawerDraw extends Drawer{
             text: 'Pontos de Coleta',
             onTap: () =>
             ///TODO CRIAR REDIRECIONAMENTO PARA PONTOS DE COLETA
-            Navigator.pushNamed(context, '/ClientHomePage'),
+            Navigator.pushNamed(context, '/PontosDeColeta'),
           ),
           _createDrawerItem(
             icon: Icons.event,
@@ -60,17 +60,17 @@ class DrawerDraw extends Drawer{
           ),
           _createDrawerItem(
             icon: Icons.event,
-            text: 'Verificar Doador',
+            text: 'Realizar Doação',
             onTap: () =>
             ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR DOADOR
-            Navigator.pushNamed(context, '/ClientHomePage'),
+            Navigator.pushNamed(context, '/DoacaoGeral'),
           ),
           _createDrawerItem(
             icon: Icons.event,
             text: 'Verificar Receptor',
             onTap: () =>
             ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR RECEPTOR
-            Navigator.pushNamed(context, '/ClientHomePage'),
+            Navigator.pushNamed(context, '/AlterDado'),
           ),
           LinearGradientItens(
             child: Divider(
@@ -83,7 +83,7 @@ class DrawerDraw extends Drawer{
             text: 'Verificar Ranking',
             onTap: () =>
             ///TODO CRIAR REDIRECIONAMENTO PARA RANKING
-            Navigator.pushNamed(context, '/ClientHomePage'),
+            Navigator.pushNamed(context, '/DoacaoEfetiva'),
           ),
           _createDrawerItem(
             icon: Icons.event,

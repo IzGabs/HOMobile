@@ -36,15 +36,16 @@ class MyApp extends StatelessWidget {
         '/Login': (context) => Login(),
         '/Beneficios': (context) => Beneficios(),
         '/DoacaoGeral': (context) => DoacaoGeral(),
+     // '/GerenciarDoacao': (context) => GerenciarDoacao(),
         '/DoacaoEfetiva': (context) => DoacaoEfetiva(),
         '/PontosDeColeta': (context) => PontosDeColeta(),
         '/ClientHomePage': (context) => PerfilHome(),
         '/HomeCadastro': (context) => HomeCadastro(),
         '/DrawerDraw': (context) => DrawerDraw(),
-        '/AlterarDados': (context) => AlterarDados(),
+        '/AlterDado': (context) => AlterDado(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
       },
-      home: Beneficios(),
+      home: DoacaoEfetiva(),
     );
   }
 

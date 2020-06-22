@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
+import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
-class AlterarDados extends StatefulWidget {
+class AlterDado extends StatefulWidget {
   @override
-  _AlterarDadosState createState() => _AlterarDadosState();
+  _AlterDadoState createState() => _AlterDadoState();
 }
 
-class _AlterarDadosState extends State<AlterarDados> {
+class _AlterDadoState extends State<AlterDado> {
   final _sendBtn = Padding(
     padding: EdgeInsets.only(top: 20, bottom: 15, left: 60, right: 60),
     child: ShaderMask(
@@ -53,11 +54,27 @@ class _AlterarDadosState extends State<AlterarDados> {
     final double scrHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      drawer: DrawerDraw(),
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: appBarTransparente('Alterar Dados'),
+      resizeToAvoidBottomInset: false,
+      appBar: new AppBar(
+        actions: [
+          LinearGradientItens(child: IconButton(icon: Icon(Icons.settings), onPressed: (){ Navigator.pushNamed(context, '/AlterDado');}, color: Colors.blue, iconSize: 35,))
+        ],
+        centerTitle: true,
+        title: LinearGradientItens(
+            child: Text(
+              'Alterar Dados',
+              style: TextStyle(color: Colors.white),
+            )
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: ListView(
         children: [
-          returnLogoApp(10.0, 5.0, 25, paddingTitle: 10, needTitle: true),
+          returnLogoApp(10.0, 5.0, 25, true, paddingTitle: 10,),
+     //   returnLogoApp(10.0, 5.0, 25, paddingTitle: 10, needTitle: true),
           SizedBox(height: 50),
 
           /// TODO adicionar imagem do usuário [Bloco de imagem provisorio]
