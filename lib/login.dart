@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'Clients/Controller/ClientController.dart';
 import 'ReusableWidgets/CommonsWidgetsMethods.dart';
+import 'main.dart';
 
 class Login extends StatelessWidget {
+  TextEditingController _usuario = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+  ClientController controllerAPI = new ClientController();
   @override
   Widget build(BuildContext context) {
+
     final double scrHeight = MediaQuery.of(context).size.height;
 
 //Botão de Enviar
@@ -22,9 +28,8 @@ class Login extends StatelessWidget {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(20)),
           color: Colors.white,
-          onPressed: () {
-            ///TODO  Login, uso o SharedPreferences pra manter ele logado?
-            ///Caso precise manter ele logado, eu coloco mas nao sei se vai dar tempo (levando em conta o tempo até a entrega)
+          onPressed: () async {
+            await controllerAPI.login(_usuario.text, _password.text.toString()).then((value) => token = value['access']);
             Navigator.popAndPushNamed(context, '/ClientHomePage');
           },
           child: Row(
@@ -115,9 +120,9 @@ class Login extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             textFormFieldFactory(
-                'Digite o seu email', 'Email', scrHeight, Icons.email, false),
+                'Digite o seu email', 'Email', scrHeight, Icons.email, false, _usuario),
             textFormFieldFactory(
-                'Digite a sua senha', 'Senha', scrHeight, Icons.lock, true),
+                'Digite a sua senha', 'Senha', scrHeight, Icons.lock, true, _password),
             _sendBtn,
             _regBtn
           ],

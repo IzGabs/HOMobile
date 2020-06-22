@@ -4,7 +4,8 @@ import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
 class PerfilHome extends StatelessWidget {
-  const PerfilHome({Key key}) : super(key: key);
+  final token;
+  const PerfilHome({Key key, this.token}) : super(key: key);
 
   /// TODO colocar os campos obrigatórios que ele precisa passa pra acessar essa tela
 

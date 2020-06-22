@@ -71,7 +71,7 @@ Widget returnLogoApp(
 /// {@end-tool}
 
 Widget textFormFieldFactory(
-    String desc, String tipo, double scrHeight, IconData icone, bool password,
+    String desc, String tipo, double scrHeight, IconData icone, bool password, TextEditingController controller,
     {Function validator, double borderRadius, IconData suffixIcon}) {
   return Container(
     padding: EdgeInsets.all(16),
@@ -84,6 +84,7 @@ Widget textFormFieldFactory(
       borderRadius: BorderRadius.circular(borderRadius ?? borderRadius ?? 25.0),
       child: TextFormField(
         validator: validator,
+        controller: controller,
         obscureText: password,
         cursorColor: Colors.blue,
         textAlign: TextAlign.start,

@@ -9,6 +9,7 @@ class PontosDeColeta extends StatefulWidget {
 }
 
 class _PontosDeColetaState extends State<PontosDeColeta> {
+  TextEditingController _local = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final double scrHeight = MediaQuery.of(context).size.height;
@@ -33,13 +34,14 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
       ),
       body: ListView(
         children: [
-          returnLogoApp(10.0, 5.0, 25,true  ,paddingTitle: 10, ),
+          returnLogoApp(10.0, 5.0, 25,true, paddingTitle: 10, ),
           textFormFieldFactory(
             'Onde você está? ',
             'Pesquisar Locais proximos',
             scrHeight,
             Icons.search,
             false,
+            _local,
             suffixIcon: Icons.search,
           ),
           //
