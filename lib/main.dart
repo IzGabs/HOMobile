@@ -15,7 +15,7 @@ import 'login.dart';
 void main() {
   runApp(MyApp());
 }
-
+var token;
 const pathAPI = 'http://10.0.2.2:8000/';
 
 class MyApp extends StatelessWidget {
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/AlterDado': (context) => AlterDado(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
       },
-      home: ListDonate(),
+      home: Login(),
     );
   }
 

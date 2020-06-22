@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:help_others/Clients/Controller/ClientController.dart';
 import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 
@@ -13,23 +14,7 @@ class DoacaoGeral extends StatefulWidget {
 }
 
 class ToDoListState extends State<DoacaoGeral> {
-  List<TaskModel> taskList = [
-    TaskModel(
-        id: '1',
-        title: 'Item 1',
-        status: 'Não-Perecível/Outros',
-        name: 'Camisa'),
-    TaskModel(
-        id: '2',
-        title: 'Item 2',
-        status: 'Não-Perecível/Outros',
-        name: 'Jeans'),
-    TaskModel(
-        id: '3',
-        title: 'Item 3',
-        status: 'Perecível',
-        name: 'Lanchinho da Madrugada')
-  ];
+  ClientController controllerAPI = new ClientController();
 
   @override
   Widget build(BuildContext context) {
@@ -95,17 +80,9 @@ class ToDoListState extends State<DoacaoGeral> {
     );
   }
 
-  void _onReorder(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      final TaskModel item = taskList.removeAt(oldIndex);
-      taskList.insert(newIndex, item);
-    });
-  }
 
-  Widget ownerNameWidget(TaskModel todo) {
+
+  Widget ownerNameWidget(String value) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(8.0),
@@ -125,7 +102,7 @@ class ToDoListState extends State<DoacaoGeral> {
             Padding(
               padding: EdgeInsets.only(top: 5.0),
               child: Text(
-                '${todo.name}',
+                value,
                 style: TextStyle(
                   fontSize: 17.0,
                 ),
@@ -137,7 +114,7 @@ class ToDoListState extends State<DoacaoGeral> {
     );
   }
 
-  Widget statusWidget(TaskModel todo) {
+  Widget statusWidget(String value2) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(8.0),
@@ -157,7 +134,7 @@ class ToDoListState extends State<DoacaoGeral> {
             Padding(
               padding: EdgeInsets.only(top: 5.0),
               child: Text(
-                '${todo.status}',
+                value2,
                 style: TextStyle(
                   fontSize: 17.0,
                 ),
@@ -169,15 +146,14 @@ class ToDoListState extends State<DoacaoGeral> {
     );
   }
 
-  Widget toDo(TaskModel todo) {
+  Widget toDo(Map doc) {
     return Container(
-        key: Key(todo.id),
         margin: EdgeInsets.all(10.0),
         decoration: BoxDecoration(shape: BoxShape.rectangle,
             //color: const Color(0xFF66BB6A),
             boxShadow: [
               BoxShadow(
-                color: Colors.white12,
+                color: Colors.grey,
                 blurRadius: 5.0,
               ),
             ]),
@@ -190,7 +166,7 @@ class ToDoListState extends State<DoacaoGeral> {
                 10.0,
               ),
               child: Text(
-                todo.title,
+                ','
               ),
             ),
             Padding(
@@ -198,8 +174,8 @@ class ToDoListState extends State<DoacaoGeral> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ownerNameWidget(todo),
-                  statusWidget(todo),
+                  ownerNameWidget(doc['item']),
+                  statusWidget(doc['tipo']),
                 ],
               ),
             )
@@ -208,24 +184,28 @@ class ToDoListState extends State<DoacaoGeral> {
   }
 
   Widget buildBody() {
-    return ReorderableListView(
-      children: taskList.map((todo) {
-        return toDo(todo);
-      }).toList(),
-      onReorder: _onReorder,
+    return Center(
+      child: FutureBuilder(
+          future: controllerAPI.getDonates(),
+          builder: (context, snap) {
+            return snap.connectionState == ConnectionState.done
+                ? snap.hasData
+                  ? ListView.builder(
+                    itemBuilder: (context, index) => toDo(snap.data[index]),
+                      itemCount: snap.data.length,
+                    )
+                  : Text('Nao ha dados')
+                : CircularProgressIndicator();
+          }),
     );
   }
 }
-
-class TaskModel {
-  String id;
-  String title;
-  String status;
-  String name;
-
-  TaskModel(
-      {@required this.id,
-      @required this.title,
-      @required this.status,
-      @required this.name});
-}
+/*
+Card(
+                color: Colors.white,
+                child: ListTile(
+                  title: Text(snap.data[index]['donate']),
+                  subtitle: Text(snap.data[index]['address']),
+                ),
+              ),
+ */

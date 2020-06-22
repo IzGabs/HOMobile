@@ -9,6 +9,12 @@ class AlterDado extends StatefulWidget {
 }
 
 class _AlterDadoState extends State<AlterDado> {
+  TextEditingController _senha = new TextEditingController();
+  TextEditingController _novaSenha = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _novoEmail = new TextEditingController();
+
+
   final _sendBtn = Padding(
     padding: EdgeInsets.only(top: 20, bottom: 15, left: 60, right: 60),
     child: ShaderMask(
@@ -89,13 +95,13 @@ class _AlterDadoState extends State<AlterDado> {
 
           ///
           textFormFieldFactory('Digite a senha atual', 'Senha Atual', scrHeight,
-              Icons.vpn_key, true),
+              Icons.vpn_key, true, _senha),
           textFormFieldFactory('Digite a nova senha', 'Nova Senha', scrHeight,
-              Icons.vpn_key, true),
+              Icons.vpn_key, true, _novaSenha),
           textFormFieldFactory(
-              'Email atual', 'Email atual', scrHeight, Icons.mail, false),
+              'Email atual', 'Email atual', scrHeight, Icons.mail, false, _email),
           textFormFieldFactory(
-              'Email novo', 'Email novo', scrHeight, Icons.mail, false),
+              'Email novo', 'Email novo', scrHeight, Icons.mail, false, _novoEmail),
           _sendBtn
         ],
       ),

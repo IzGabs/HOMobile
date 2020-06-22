@@ -7,6 +7,11 @@ class DoacaoMonetaria extends StatefulWidget {
 }
 
 class _DoacaoMonetariaState extends State<DoacaoMonetaria> {
+  TextEditingController _numCartao = new TextEditingController();
+  TextEditingController _nome = new TextEditingController();
+  TextEditingController _cvv = new TextEditingController();
+  TextEditingController _validade = new TextEditingController();
+  TextEditingController _valor = new TextEditingController();
   final _sendBtn = Padding(
     padding: EdgeInsets.only(top: 20, bottom: 15, left: 60, right: 60),
     child: ShaderMask(
@@ -61,23 +66,23 @@ class _DoacaoMonetariaState extends State<DoacaoMonetaria> {
             returnLogoApp(10.0, 5.0, 25, true, paddingTitle: 10),
             SizedBox(height: 30),
             textFormFieldFactory('Numero do Cartão', 'Num. Cartão', scrHeight,
-                Icons.credit_card, false,
+                Icons.credit_card, false, _numCartao,
                 borderRadius: 10),
             textFormFieldFactory('Nome (Como escrito no cartão)', 'Nome',
-                scrHeight, Icons.person, false,
+                scrHeight, Icons.person, false, _nome,
                 borderRadius: 10),
             textFormFieldFactory('Cvv (3 numeros atrás do cartão)', 'CVV',
-                scrHeight, Icons.chrome_reader_mode, false,
+                scrHeight, Icons.chrome_reader_mode, false, _cvv,
                 borderRadius: 10),
             textFormFieldFactory(
                 'Validade do cartão',
                 'Data de Validade do cartão',
                 scrHeight,
                 Icons.date_range,
-                false,
+                false,_validade,
                 borderRadius: 10),
             textFormFieldFactory('Valor da Doação', 'Valor a ser doado',
-                scrHeight, Icons.attach_money, false,
+                scrHeight, Icons.attach_money, false, _valor,
                 borderRadius: 10),
             _sendBtn
           ],
