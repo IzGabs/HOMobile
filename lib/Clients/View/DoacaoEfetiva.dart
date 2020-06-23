@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:help_others/Clients/Controller/ClientController.dart';
 import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
+
+import '../../main.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKeyDoacao =
     new GlobalKey<ScaffoldState>();
@@ -11,6 +14,11 @@ class DoacaoEfetiva extends StatefulWidget {
 }
 
 class _State extends State<DoacaoEfetiva> {
+  ClientController controllerAPI = new ClientController();
+  List<Map> donates = new List<Map>();
+  List<Map> listaperecivel = new List<Map>();
+  List<Map> listaNaoperecivel = new List<Map>();
+
   List<Produto> _availableProducts = [];
   List<Produto> _selecProducts = [];
 
@@ -33,9 +41,16 @@ class _State extends State<DoacaoEfetiva> {
         });
   }
 
+  Future<void> _getDonates() async {
+    List<Map> donates = await controllerAPI.getDonates(token);
+    listaperecivel = donates.where((element) => element['tipo'] == 'perecivel');
+    listaNaoperecivel = donates.where((element) => element['tipo'] == 'perecivel');
+  }
+
   @override
   void initState() {
     super.initState();
+    _getDonates();
     _availableProducts = [
       Produto(id: 0, name: "Давно", type: "Почему", picture: "test"),
       Produto(id: 1, name: "это текст", type: "Cука", picture: "test"),
@@ -105,23 +120,8 @@ class _State extends State<DoacaoEfetiva> {
     );
   }
 
-  _onReorder(int oldIndex, int newIndex) {
-    if (newIndex > oldIndex) {
-      newIndex -= 1;
-    }
-    print('oldIndex:$oldIndex');
-    print('newIndex:$newIndex');
-    setState(() {
-      Produto player = _selecProducts[newIndex];
-      _selecProducts[newIndex] = _selecProducts[oldIndex];
-      _selecProducts[oldIndex] = player;
-    });
-  }
 
-  final List<Tab> _minhasTabs = <Tab>[
-    new Tab(icon: new Icon(Icons.timelapse), text: "Perecível"),
-    new Tab(icon: new Icon(Icons.restore), text: "Não-Perecível"),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +164,32 @@ class _State extends State<DoacaoEfetiva> {
         ),
       ),
     );
+    Widget _perecivel (List<Map> x){
+      LinearGradientItens(
+        child: Card(
+          child: ListTile(
+            leading: Icon(Icons.arrow_forward),
+            title: Text("Escolher..."),
+          //  onTap: _selProd(),
+          ),
+        ),
+      );
+      Align(alignment: Alignment.bottomCenter, child: _sendBtn);
+    }
+
+
+    Widget _naoperecivel(List<Map> x){
+      LinearGradientItens(
+        child: Card(
+          child: ListTile(
+            leading: Icon(Icons.arrow_forward),
+            title: Text("Escolher..."),
+          //  onTap: _selProd(),
+          ),
+        ),
+      );
+      Align(alignment: Alignment.bottomCenter, child: _sendBtn);
+    }
 
     return DefaultTabController(
       length: 2,
@@ -176,13 +202,14 @@ class _State extends State<DoacaoEfetiva> {
           actions: [
             LinearGradientItens(
                 child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pushNamed(context, '/DoacaoGeral');
-              },
-              color: Colors.blue,
-              iconSize: 35,
-            ))
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/DoacaoGeral');
+                  },
+                  color: Colors.blue,
+                  iconSize: 35,
+                )
+              )
           ],
           centerTitle: true,
           title: LinearGradientItens(
@@ -195,7 +222,16 @@ class _State extends State<DoacaoEfetiva> {
           bottom: new TabBar(
             labelColor: Colors.green,
             unselectedLabelColor: Colors.blue,
-            tabs: _minhasTabs,
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.dashboard),
+                text: 'sxs',
+              ),
+              Tab(
+                icon: Icon(Icons.check_circle_outline),
+                text: 'xzxx',
+              ),
+            ],
           ),
         ),
         resizeToAvoidBottomPadding: false,
@@ -210,45 +246,29 @@ class _State extends State<DoacaoEfetiva> {
           ),
           child: new TabBarView(
             ///PageStorageKey
-            children: _minhasTabs.map((Tab tab) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-
-                ///TODO sendbtn tem q enviar dados. dar msg(pode ser snackbar) q enviou e retornar a tela main
-                child: Column(
-                  children: <Widget>[
-                    LinearGradientItens(
-                      child: Card(
-                        child: ListTile(
-                          leading: Icon(Icons.arrow_forward),
-                          title: Text("Escolher..."),
-                          onTap: _selProd,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: ReorderableListView(
-                        onReorder: _onReorder,
-                        children: _selecProducts.map((product) {
-                          return ListTile(
-                            key: ValueKey(product.id),
-                            title: Text(product.type + " " + product.name),
-                            leading:
-                                Text("#${_selecProducts.indexOf(product) + 1}"),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Align(alignment: Alignment.bottomCenter, child: _sendBtn),
-                  ],
-                ),
-              );
-            }).toList(),
+            children: [
+               _perecivel(listaperecivel),
+               _naoperecivel(listaNaoperecivel),
+            ],
           ),
         ),
-
         /// se sobrar tempo animar essa kenga
-        /*
+
+      ),
+    );
+  }
+}
+
+class Produto {
+  int id;
+  String name;
+  String type;
+  String picture;
+
+  Produto({this.id, this.name, this.type, this.picture});
+}
+
+/*
           floatingActionButton: FloatingActionButton(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -264,19 +284,6 @@ class _State extends State<DoacaoEfetiva> {
             ),
           ),
          */
-      ),
-    );
-  }
-}
-
-class Produto {
-  int id;
-  String name;
-  String type;
-  String picture;
-
-  Produto({this.id, this.name, this.type, this.picture});
-}
 /*
 bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: Colors.transparent,

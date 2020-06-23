@@ -52,7 +52,6 @@ class ToDoListState extends State<DoacaoGeral> {
         overlayColor: Colors.white30,
         children: [
           SpeedDialChild(
-
               ///Todo ROUTE PRA DOAÇÃO EFETIVA
               child: Icon(Icons.monetization_on),
               label: 'Doação Monetária',
@@ -63,7 +62,6 @@ class ToDoListState extends State<DoacaoGeral> {
                 Navigator.pushNamed(context, '/DoacaoMonetaria');
               }),
           SpeedDialChild(
-
               ///Todo ROUTE PRA DOAÇÃO MONETARIA
               child: Icon(Icons.check),
               label: "Doação Padrão",
@@ -185,8 +183,11 @@ class ToDoListState extends State<DoacaoGeral> {
                         itemBuilder: (context, index) => Card(
                           child: ListTile(
                             title: Text('Item: ' + snap.data[index]['item']),
-                            subtitle: Text('Tipo: ' + snap.data[index]['tipo']),
+                            subtitle: Text('Endereço: ' + snap.data[index]['endereco']),
                             leading: Icon(Icons.art_track),
+                            onTap: (){
+                            Navigator.pushNamed(context, '/infodonate', arguments: snap.data[index]);
+                            },
                           ),
                         ),
                         itemCount: snap.data.length,
@@ -196,8 +197,74 @@ class ToDoListState extends State<DoacaoGeral> {
           }),
     );
   }
+
 }
+class InfoDonate extends StatelessWidget {
+  ClientController controllerAPI = new ClientController();
+  final Map info;
+  InfoDonate({this.info});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      floatingActionButton: FloatingActionButton.extended(onPressed: (){controllerAPI.reservarDoacao(info['url'], token); }, label: Text('Eu quero'), icon: Icon(Icons.thumb_up),),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            info['item'],
+          ),
+          Text(
+            info['tipo'],
+          ),
+          Text(
+            info['endereco'],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /*
+
+
+FutureBuilder(
+                        future: controllerAPI.getDonates(),
+                        builder: (context, snap) {
+                          return snap.connectionState == ConnectionState.done
+                              ? snap.hasData
+                                    ? ListView.builder(
+                                          itemBuilder: (context, index) => Card(
+                                            child: ListTile(
+                                              title: Text('Item: ' + snap.data[index]['item']),
+                                              subtitle: Text('Tipo: ' + snap.data[index]['tipo']),
+                                              leading: Icon(Icons.art_track),
+                                            ),
+                                          ),
+                                        itemCount: snap.data.length,
+                                      )
+                                    : Text('Nao ha dados')
+                              : CircularProgressIndicator();
+                        }),
+
+
+ListView(
+                          children: _selecProducts.map((product) {
+                            return ListTile(
+                              key: ValueKey(product.id),
+                              title: Text(product.type + " " + product.name),
+                              leading:
+                                  Text("#${_selecProducts.indexOf(product) + 1}"),
+                            );
+                          }).toList(),
+                        ),
+
+
+
+
+
 Card(
                 color: Colors.white,
                 child: ListTile(
