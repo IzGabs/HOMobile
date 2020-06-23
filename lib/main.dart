@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/Clients/View/Beneficios.dart';
 import 'package:help_others/Clients/View/ClientHome.dart';
+import 'package:help_others/Clients/View/GerenciarDoacao.dart';
 
 import './Clients/View/AlterarDados.dart';
 import './Clients/View/DoacaoMonetaria.dart';
@@ -15,7 +16,8 @@ import 'login.dart';
 void main() {
   runApp(MyApp());
 }
-var token;
+
+var token = '';
 const pathAPI = 'http://10.0.2.2:8000/';
 
 class MyApp extends StatelessWidget {
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/DrawerDraw': (context) => DrawerDraw(),
         '/AlterDado': (context) => AlterDado(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
+        '/GerenciarDoacao': (context) => GerenciarDoacao(),
       },
       home: Login(),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_others/Clients/Controller/ClientController.dart';
 import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
+import 'package:help_others/main.dart';
 
 class ListDonate extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class _ListDonateState extends State<ListDonate> {
       ),
       body: Center(
         child: FutureBuilder(
-            future: controllerAPI.getDonates(),
+            future: controllerAPI.getDonates(token),
             builder: (context, snap) {
               return snap.connectionState == ConnectionState.done
                   ? snap.hasData

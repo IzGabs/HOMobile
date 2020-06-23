@@ -6,9 +6,7 @@ const String _AccountName = 'Essa app ta uma caquita';
 const String _AccountEmail = 'ProfJulianaPFFF@MEDA10.com';
 const String _AccountAbbr = 'ZuLul';
 
-class DrawerDraw extends Drawer{
-
-
+class DrawerDraw extends Drawer {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,24 +17,19 @@ class DrawerDraw extends Drawer{
           _createHeader(),
           _createDrawerItem(
             icon: Icons.contacts,
-            text: 'Gerenciar Doação',
+            text: 'Realizar Doação',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA GERENCIAR DOAÇÃO
-            Navigator.pushNamed(context, '/ClientHomePage'),
-          ),
-          _createDrawerItem(
-            icon: Icons.event,
-            text: 'Analisar Perfil',
-            onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA ANALISAR PERFIL
-            Navigator.pushNamed(context, '/ClientHomePage'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA GERENCIAR DOAÇÃO
+                Navigator.pushNamed(context, '/GerenciarDoacao'),
           ),
           _createDrawerItem(
             icon: Icons.note,
             text: 'Verificar Benefício',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR BENEFÍCIO
-            Navigator.pushNamed(context, '/Beneficios'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR BENEFÍCIO
+                Navigator.pushNamed(context, '/Beneficios'),
           ),
           LinearGradientItens(
             child: Divider(
@@ -48,29 +41,25 @@ class DrawerDraw extends Drawer{
             icon: Icons.event,
             text: 'Pontos de Coleta',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA PONTOS DE COLETA
-            Navigator.pushNamed(context, '/PontosDeColeta'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA PONTOS DE COLETA
+                Navigator.pushNamed(context, '/PontosDeColeta'),
           ),
           _createDrawerItem(
             icon: Icons.event,
-            text: 'Historico',
+            text: 'HomePage',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA HISTORICO
-            Navigator.pushNamed(context, '/ClientHomePage'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA HISTORICO
+                Navigator.pushNamed(context, '/ClientHomePage'),
           ),
           _createDrawerItem(
             icon: Icons.event,
-            text: 'Realizar Doação',
+            text: 'Listagem Doações',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR DOADOR
-            Navigator.pushNamed(context, '/DoacaoGeral'),
-          ),
-          _createDrawerItem(
-            icon: Icons.event,
-            text: 'Verificar Receptor',
-            onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR RECEPTOR
-            Navigator.pushNamed(context, '/AlterDado'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA VERIFICAR DOADOR
+                Navigator.pushNamed(context, '/DoacaoGeral'),
           ),
           LinearGradientItens(
             child: Divider(
@@ -82,22 +71,9 @@ class DrawerDraw extends Drawer{
             icon: Icons.event,
             text: 'Verificar Ranking',
             onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA RANKING
-            Navigator.pushNamed(context, '/DoacaoEfetiva'),
-          ),
-          _createDrawerItem(
-            icon: Icons.event,
-            text: 'Mais Novidades',
-            onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA MAIS NOVIDADES
-            Navigator.pushNamed(context, '/ClientHomePage'),
-          ),
-          _createDrawerItem(
-            icon: Icons.event,
-            text: 'Descrição',
-            onTap: () =>
-            ///TODO CRIAR REDIRECIONAMENTO PARA DESCRIÇÃO
-            Navigator.pushNamed(context, '/ClientHomePage'),
+
+                ///TODO CRIAR REDIRECIONAMENTO PARA RANKING
+                Navigator.pushNamed(context, '/DoacaoEfetiva'),
           ),
           _createDrawerItem(icon: Icons.bug_report, text: 'Reportar Bugs'),
         ],
@@ -114,9 +90,7 @@ class DrawerDraw extends Drawer{
             accountName: const Text(_AccountName),
             accountEmail: const Text(_AccountEmail),
             currentAccountPicture: new CircleAvatar(
-                backgroundColor: Colors.black,
-                child: new Text(_AccountAbbr)
-            ),
+                backgroundColor: Colors.black, child: new Text(_AccountAbbr)),
             otherAccountsPictures: <Widget>[
               new GestureDetector(
                 //onTap: () => _onTapOtherAccounts(context),
@@ -131,8 +105,7 @@ class DrawerDraw extends Drawer{
             ],
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('images/tela.jpg'))),
+                    fit: BoxFit.fill, image: AssetImage('images/tela.jpg'))),
           ),
         ]));
   }

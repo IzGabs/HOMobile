@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_others/Clients/Controller/ClientController.dart';
+import 'package:help_others/main.dart';
 import '../../ReusableWidgets/GradientWidgets.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -126,25 +127,19 @@ class _CadastroState extends State<Cadastro> {
     });
   }
 
-  _sendForm() {
+  _sendForm() async {
     if (_formKey.currentState.validate()) {
       // Sem erros na validação
       _formKey.currentState.save();
       _validate = true;
 
-      ClientController()
-          .postRegUser(_user.text, _nome.text, _sobrenome.text, _email.text,
-              _senha.text, _endereco.text)
-          .then((value) {
-        Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text(value),
-          ),
-        );
-      });
-
-      ///TODO ADICIONAR FUNÇÃO DE CADASTRO E RETORNO BACK END
-      //   Navigator.pushNamed(context, '/ClientHomePage');
+      Map x = await ClientController().postRegUser(_user.text, _nome.text,
+          _sobrenome.text, _email.text, _senha.text, _endereco.text, token);
+      x['detail'] != null
+          ? Scaffold.of(context).showSnackBar(
+              SnackBar(content: Text(x['detail'])),
+            )
+          : Navigator.pushNamed(context, '/ClientHomePage');
     } else {
       // erro de validação
       setState(() {

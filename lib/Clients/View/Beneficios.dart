@@ -10,7 +10,6 @@ class Beneficios extends StatefulWidget {
 class _BeneficiosState extends State<Beneficios> {
   @override
   Widget build(BuildContext context) {
-
     List<String> itens = [
       'Benefício A',
       'Benefício B',
@@ -22,7 +21,6 @@ class _BeneficiosState extends State<Beneficios> {
       'Benefício C',
       'Benefício D',
       'Benefício E',
-
     ];
 
     return Scaffold(
@@ -31,25 +29,31 @@ class _BeneficiosState extends State<Beneficios> {
       resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         actions: [
-          LinearGradientItens(child: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){ Navigator.pushNamed(context, '/ClientHomePage');}, color: Colors.blue, iconSize: 35,))
+          LinearGradientItens(
+              child: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/ClientHomePage');
+            },
+            color: Colors.blue,
+            iconSize: 35,
+          ))
         ],
-
         centerTitle: true,
         title: LinearGradientItens(
             child: Text(
-              'Benefícios',
-              style: TextStyle(color: Colors.white),
-            )
-        ),
+          'Benefícios',
+          style: TextStyle(color: Colors.white),
+        )),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ReorderableListView(
         children: [
-          for(final item in itens)
+          for (final item in itens)
             Card(
-              color: Colors.white12,
-              shadowColor: Colors.black12,
+              color: Colors.white,
+              shadowColor: Colors.black,
               key: ValueKey(item),
               elevation: 2,
               child: ListTile(
@@ -58,10 +62,10 @@ class _BeneficiosState extends State<Beneficios> {
               ),
             )
         ],
-        onReorder: (oldIndex,newIndex){
+        onReorder: (oldIndex, newIndex) {
           setState(() {
-            if(newIndex>oldIndex){
-              newIndex-=1;
+            if (newIndex > oldIndex) {
+              newIndex -= 1;
             }
             final item = itens.removeAt(oldIndex);
             itens.insert(newIndex, item);

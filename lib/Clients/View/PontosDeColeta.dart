@@ -20,21 +20,34 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
       resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         actions: [
-          LinearGradientItens(child: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){ Navigator.pushNamed(context, '/ClientHomePage');}, color: Colors.blue, iconSize: 35,))
+          LinearGradientItens(
+              child: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/ClientHomePage');
+            },
+            color: Colors.blue,
+            iconSize: 35,
+          ))
         ],
         centerTitle: true,
         title: LinearGradientItens(
             child: Text(
-              'Listagem de Produtos',
-              style: TextStyle(color: Colors.white),
-            )
-        ),
+          'Listagem de Produtos',
+          style: TextStyle(color: Colors.white),
+        )),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
         children: [
-          returnLogoApp(10.0, 5.0, 25,true, paddingTitle: 10, ),
+          returnLogoApp(
+            10.0,
+            5.0,
+            25,
+            true,
+            paddingTitle: 10,
+          ),
           textFormFieldFactory(
             'Onde você está? ',
             'Pesquisar Locais proximos',
@@ -66,16 +79,14 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
           // ListView.builder(itemBuilder: )
           Column(
             children: [
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
-              _generateContainer(Colors.grey.shade300),
+              _generateContainer('Casa de Virgo (Shaka)', '6a Casa (de 12)'),
+              _generateContainer(
+                  'SunnyGO', 'Em algum lugar da GrandLine (Wano)'),
+              _generateContainer('Sala do Hokage', 'Konohagakure'),
+              _generateContainer(
+                  'Vingadores', 'Sede Vingadores, sala Hulk Agiota'),
+              _generateContainer(
+                  'Satan House', 'Casa do Mr.Satan (Maior lutador vivo)'),
             ],
           ),
         ],
@@ -83,13 +94,21 @@ class _PontosDeColetaState extends State<PontosDeColeta> {
     );
   }
 
-  Container _generateContainer(color) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(10)),
-      height: 100,
-      width: double.infinity,
+  Padding _generateContainer(tipo, localizacao) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Card(
+        shape: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: ListTile(
+          contentPadding: EdgeInsets.all(10.0),
+          title: Text('Tipo: ' + tipo),
+          subtitle: Text('Local: ' + localizacao),
+          leading: Icon(Icons.place),
+        ),
+      ),
     );
   }
 }

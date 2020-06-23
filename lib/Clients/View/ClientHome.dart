@@ -80,15 +80,22 @@ class PerfilHome extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         actions: [
-          LinearGradientItens(child: IconButton(icon: Icon(Icons.settings), onPressed: (){ Navigator.pushNamed(context, '/AlterDado');}, color: Colors.blue, iconSize: 35,))
+          LinearGradientItens(
+              child: IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.pushNamed(context, '/AlterDado');
+            },
+            color: Colors.blue,
+            iconSize: 35,
+          ))
         ],
         centerTitle: true,
         title: LinearGradientItens(
             child: Text(
-              'Home',
-              style: TextStyle(color: Colors.white),
-            )
-        ),
+          'Home',
+          style: TextStyle(color: Colors.white),
+        )),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -101,10 +108,13 @@ class PerfilHome extends StatelessWidget {
           _imageUser,
           SizedBox(height: 50),
           //
-          _generateContainer(Colors.green),
-          _generateContainer(Colors.yellow),
-          _generateContainer(Colors.blue),
-          _generateContainer(Colors.red)
+          _generateContainer('Vem nota',
+              'Professora ve o melhor front da vida e da 10 pros menino bom'),
+          _generateContainer('Corda no pescoço',
+              'Professora da nota pelo amor de deus, isso nao é meme'),
+          _generateContainer(
+              'Brasil ocupa ranking de sustentabilidade', 'O brasil é pika'),
+          _generateContainer('Indices de fome caem no mundo', 'Muito bom'),
           // returnLogoApp(10.0, 6.0, 25, paddingTitle: 20),
         ],
       ),
@@ -112,13 +122,24 @@ class PerfilHome extends StatelessWidget {
   }
 
 //Aqui vai ser gerada as noticias de acordo com o que o cara receber
-  Container _generateContainer(color) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
-      height: 100,
-      width: double.infinity,
+  Padding _generateContainer(tipo, noticia) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Card(
+        shape: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: ListTile(
+          contentPadding: EdgeInsets.all(10.0),
+          title: Text(tipo),
+          subtitle: Text(noticia),
+          leading: Icon(
+            Icons.new_releases,
+            color: Colors.green,
+          ),
+        ),
+      ),
     );
   }
 

@@ -8,9 +8,11 @@ class Login extends StatelessWidget {
   TextEditingController _usuario = new TextEditingController();
   TextEditingController _password = new TextEditingController();
   ClientController controllerAPI = new ClientController();
+
+  GlobalKey<ScaffoldState> _scafoldLoginKey = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
-
     final double scrHeight = MediaQuery.of(context).size.height;
 
 //Botão de Enviar
@@ -29,8 +31,16 @@ class Login extends StatelessWidget {
               borderRadius: BorderRadius.circular(20)),
           color: Colors.white,
           onPressed: () async {
-            await controllerAPI.login(_usuario.text, _password.text.toString()).then((value) => token = value['access']);
-            Navigator.popAndPushNamed(context, '/ClientHomePage');
+            Map loginResponse = await controllerAPI.login(
+                _usuario.text, _password.text.toString());
+
+            if (loginResponse['detail'] == null) {
+              token = loginResponse['access'];
+              Navigator.popAndPushNamed(context, '/ClientHomePage');
+            } else {
+              _scafoldLoginKey.currentState.showSnackBar(
+                  SnackBar(content: Text(loginResponse['detail'])));
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -119,10 +129,10 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            textFormFieldFactory(
-                'Digite o seu email', 'Email', scrHeight, Icons.email, false, _usuario),
-            textFormFieldFactory(
-                'Digite a sua senha', 'Senha', scrHeight, Icons.lock, true, _password),
+            textFormFieldFactory('Digite o seu user', 'User', scrHeight,
+                Icons.email, false, _usuario),
+            textFormFieldFactory('Digite a sua senha', 'Senha', scrHeight,
+                Icons.lock, true, _password),
             _sendBtn,
             _regBtn
           ],
@@ -138,6 +148,7 @@ class Login extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        key: _scafoldLoginKey,
         backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,

@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:help_others/Clients/Controller/ClientController.dart';
 import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
+import 'package:help_others/main.dart';
 
 class DoacaoGeral extends StatefulWidget {
   DoacaoGeral({Key key, this.title}) : super(key: key);
@@ -48,39 +49,35 @@ class ToDoListState extends State<DoacaoGeral> {
         curve: Curves.bounceOut,
         backgroundColor: Colors.blue,
         animatedIcon: AnimatedIcons.menu_close,
-        overlayColor: Colors.black,
+        overlayColor: Colors.white30,
         children: [
           SpeedDialChild(
-            ///Todo ROUTE PRA DOAÇÃO EFETIVA
-            child: Icon(Icons.monetization_on),
-            labelBackgroundColor: Colors.black87,
-            label: 'Doação Monetária',
-            labelStyle: TextStyle(fontSize: 18.0),
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.black,
-          ),
+
+              ///Todo ROUTE PRA DOAÇÃO EFETIVA
+              child: Icon(Icons.monetization_on),
+              label: 'Doação Monetária',
+              labelStyle: TextStyle(fontSize: 18.0),
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.black,
+              onTap: () {
+                Navigator.pushNamed(context, '/DoacaoMonetaria');
+              }),
           SpeedDialChild(
-            ///Todo ROUTE PRA DOAÇÃO MONETARIA
-            child: Icon(Icons.check),
-            labelBackgroundColor: Colors.black87,
-            label: "Doação Padrão",
-            labelStyle: TextStyle(fontSize: 18.0),
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.black,
-          ),
+
+              ///Todo ROUTE PRA DOAÇÃO MONETARIA
+              child: Icon(Icons.check),
+              label: "Doação Padrão",
+              labelStyle: TextStyle(fontSize: 18.0),
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.black,
+              onTap: () {
+                Navigator.pushNamed(context, '/DoacaoEfetiva');
+              }),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white12,
-        child: Container(
-          height: 50.0,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
-
-
 
   Widget ownerNameWidget(String value) {
     return Expanded(
@@ -147,54 +144,54 @@ class ToDoListState extends State<DoacaoGeral> {
   }
 
   Widget toDo(Map doc) {
-    return Container(
-        margin: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(shape: BoxShape.rectangle,
-            //color: const Color(0xFF66BB6A),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
+    return Card(
+      child: Container(
+          margin: EdgeInsets.all(10.0),
+          decoration:
+              BoxDecoration(shape: BoxShape.rectangle, color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(
+                  10.0,
+                ),
+                child: Text(','),
               ),
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(
-                10.0,
-              ),
-              child: Text(
-                ','
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  ownerNameWidget(doc['item']),
-                  statusWidget(doc['tipo']),
-                ],
-              ),
-            )
-          ],
-        ));
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ownerNameWidget(doc['item']),
+                    statusWidget(doc['tipo']),
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
   }
 
   Widget buildBody() {
     return Center(
       child: FutureBuilder(
-          future: controllerAPI.getDonates(),
+          future: controllerAPI.getDonates(token),
           builder: (context, snap) {
             return snap.connectionState == ConnectionState.done
                 ? snap.hasData
-                  ? ListView.builder(
-                    itemBuilder: (context, index) => toDo(snap.data[index]),
-                      itemCount: snap.data.length,
-                    )
-                  : Text('Nao ha dados')
+                    ? ListView.builder(
+                        itemBuilder: (context, index) => Card(
+                          child: ListTile(
+                            title: Text('Item: ' + snap.data[index]['item']),
+                            subtitle: Text('Tipo: ' + snap.data[index]['tipo']),
+                            leading: Icon(Icons.art_track),
+                          ),
+                        ),
+                        itemCount: snap.data.length,
+                      )
+                    : Text('Nao ha dados')
                 : CircularProgressIndicator();
           }),
     );
