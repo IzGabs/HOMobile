@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/AlterDado': (context) => AlterDado(),
         '/DoacaoMonetaria': (context) => DoacaoMonetaria(),
         '/GerenciarDoacao': (context) => GerenciarDoacao(),
+        '/infodonate': (context) => InfoDonate(),
       },
       home: Login(),
     );

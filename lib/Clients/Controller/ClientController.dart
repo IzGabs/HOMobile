@@ -34,6 +34,13 @@ class ClientController {
     );
     return json.decode(retorno.body);
   }
+  Future reservarDoacao(String url, String token) async{
+    final retorno = await http.delete(
+      url,
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    return json.decode(retorno.body);
+  }
 
   Future postDonates(_nome, _tipo, token) async {
     final retorno = await http.post(

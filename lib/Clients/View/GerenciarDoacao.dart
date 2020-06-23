@@ -13,7 +13,7 @@ class GerenciarDoacao extends StatefulWidget {
 class _GerenciarDoacaoState extends State<GerenciarDoacao> {
   TextEditingController _nomeItem = new TextEditingController();
   TextEditingController _qtdeItem = new TextEditingController();
-  TextEditingController _validadeItem = new TextEditingController();
+  TextEditingController _endereco = new TextEditingController();
   TextEditingController _validade = new TextEditingController();
   TextEditingController _valor = new TextEditingController();
   String dropDownValue;
@@ -44,12 +44,14 @@ class _GerenciarDoacaoState extends State<GerenciarDoacao> {
             Map retorno = await controllerAPI.postDonates(
                 _nomeItem.text, dropDownValue, token);
             if (retorno['url'] != null) {
+              Navigator.pushNamed(context, '/DoacaoGeral');
               Scaffold.of(context)
                   .showSnackBar(SnackBar(content: Text('Sucesso!!')));
             } else {
               Scaffold.of(context)
                   .showSnackBar(SnackBar(content: Text('Deu ruim!!')));
             }
+
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -88,6 +90,9 @@ class _GerenciarDoacaoState extends State<GerenciarDoacao> {
                 borderRadius: 10),
             textFormFieldFactory('Quantidade', 'Quantidade', scrHeight,
                 Icons.format_list_numbered_rtl, false, _qtdeItem,
+                borderRadius: 10),
+            textFormFieldFactory('Endereco', 'Endereco', scrHeight,
+                Icons.location_on, false, _endereco,
                 borderRadius: 10),
             Padding(
               padding: EdgeInsets.all(10),
