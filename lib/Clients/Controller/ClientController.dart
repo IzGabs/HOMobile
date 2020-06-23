@@ -34,18 +34,23 @@ class ClientController {
     );
     return json.decode(retorno.body);
   }
-  Future reservarDoacao(String url, String token) async{
+
+  Future reservarDoacao(String url, String token) async {
     final retorno = await http.delete(
       url,
       headers: {'Authorization': 'Bearer $token'},
     );
-    return json.decode(retorno.body);
+    return retorno.body;
   }
 
-  Future postDonates(_nome, _tipo, token) async {
+  Future postDonates(_nome, _tipo, _endereco, token) async {
     final retorno = await http.post(
       donatePath,
-      body: {'item': _nome, 'tipo': _tipo},
+      body: {
+        'item': _nome,
+        'tipo': _tipo,
+        'endereco': _endereco,
+      },
       headers: {'Authorization': 'Bearer $token'},
     );
     return json.decode(retorno.body);

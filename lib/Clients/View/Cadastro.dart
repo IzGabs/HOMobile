@@ -139,7 +139,7 @@ class _CadastroState extends State<Cadastro> {
           ? Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(x['detail'])),
             )
-          : Navigator.pushNamed(context, '/ClientHomePage');
+          : Navigator.pushNamed(context, '/Login');
     } else {
       // erro de validação
       setState(() {

@@ -52,6 +52,7 @@ class ToDoListState extends State<DoacaoGeral> {
         overlayColor: Colors.white30,
         children: [
           SpeedDialChild(
+
               ///Todo ROUTE PRA DOAÇÃO EFETIVA
               child: Icon(Icons.monetization_on),
               label: 'Doação Monetária',
@@ -62,6 +63,7 @@ class ToDoListState extends State<DoacaoGeral> {
                 Navigator.pushNamed(context, '/DoacaoMonetaria');
               }),
           SpeedDialChild(
+
               ///Todo ROUTE PRA DOAÇÃO MONETARIA
               child: Icon(Icons.check),
               label: "Doação Padrão",
@@ -183,10 +185,13 @@ class ToDoListState extends State<DoacaoGeral> {
                         itemBuilder: (context, index) => Card(
                           child: ListTile(
                             title: Text('Item: ' + snap.data[index]['item']),
-                            subtitle: Text('Endereço: ' + snap.data[index]['endereco']),
+                            subtitle: Text(
+                                'Endereço: ' + snap.data[index]['endereco']),
                             leading: Icon(Icons.art_track),
-                            onTap: (){
-                            Navigator.pushNamed(context, '/infodonate', arguments: snap.data[index]);
+                            onTap: () {
+                              Navigator.pushNamed(context, '/infodonate',
+                                  arguments:
+                                      InfoDonate(info: snap.data[index]));
                             },
                           ),
                         ),
@@ -197,31 +202,107 @@ class ToDoListState extends State<DoacaoGeral> {
           }),
     );
   }
-
 }
+
 class InfoDonate extends StatelessWidget {
-  ClientController controllerAPI = new ClientController();
+  final ClientController controllerAPI = new ClientController();
   final Map info;
   InfoDonate({this.info});
 
   @override
   Widget build(BuildContext context) {
+    final InfoDonate args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
-      appBar: AppBar(),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){controllerAPI.reservarDoacao(info['url'], token); }, label: Text('Eu quero'), icon: Icon(Icons.thumb_up),),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            info['item'],
-          ),
-          Text(
-            info['tipo'],
-          ),
-          Text(
-            info['endereco'],
-          ),
-        ],
+      appBar: AppBar(
+        title: Text('Info Doacao'),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          String x =
+              await controllerAPI.reservarDoacao(args.info['url'], token);
+          if (x == '') {
+            await showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Item: ' + args.info['item'],
+                          ),
+                          Text(
+                            'Tipo: ' + args.info['tipo'],
+                          ),
+                          Text(
+                            'Ponto de Coleta: ' + args.info['endereco'],
+                          ),
+                          SizedBox(height: 40),
+                          Text(
+                              'Reservado com sucesso! Va busca no ponto de coleta')
+                        ],
+                      ),
+                      actions: [
+                        OutlineButton.icon(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(Icons.close),
+                            label: Text('Fechar'))
+                      ],
+                    ));
+          } else {
+            await showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Item: ' + args.info['item'],
+                          ),
+                          Text(
+                            'Tipo: ' + args.info['tipo'],
+                          ),
+                          Text(
+                            'Ponto de Coleta: ' + args.info['endereco'],
+                          ),
+                          SizedBox(height: 40),
+                          Text(
+                              'Reservado com sucesso! Va busca no ponto de coleta')
+                        ],
+                      ),
+                      actions: [
+                        OutlineButton.icon(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(Icons.close),
+                            label: Text('Fechar'))
+                      ],
+                    ));
+          }
+          Navigator.popUntil(context, ModalRoute.withName('/ClientHomePage'));
+        },
+        label: Text('Eu quero'),
+        icon: Icon(Icons.thumb_up),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Item: ' + args.info['item'],
+            ),
+            Text(
+              'Tipo: ' + args.info['tipo'],
+            ),
+            Text(
+              'Ponto de Coleta: ' + args.info['endereco'],
+            ),
+          ],
+        ),
       ),
     );
   }

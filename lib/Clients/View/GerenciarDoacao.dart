@@ -17,6 +17,7 @@ class _GerenciarDoacaoState extends State<GerenciarDoacao> {
   TextEditingController _validade = new TextEditingController();
   TextEditingController _valor = new TextEditingController();
   String dropDownValue;
+  GlobalKey<ScaffoldState> _gbKeyScaffold = new GlobalKey();
 
   ClientController controllerAPI = new ClientController();
 
@@ -42,16 +43,15 @@ class _GerenciarDoacaoState extends State<GerenciarDoacao> {
           color: Colors.white,
           onPressed: () async {
             Map retorno = await controllerAPI.postDonates(
-                _nomeItem.text, dropDownValue, token);
+                _nomeItem.text, dropDownValue, _endereco.text, token);
             if (retorno['url'] != null) {
-              Navigator.pushNamed(context, '/DoacaoGeral');
-              Scaffold.of(context)
+              _gbKeyScaffold.currentState
                   .showSnackBar(SnackBar(content: Text('Sucesso!!')));
+              Navigator.pushNamed(context, '/DoacaoGeral');
             } else {
-              Scaffold.of(context)
+              _gbKeyScaffold.currentState
                   .showSnackBar(SnackBar(content: Text('Deu ruim!!')));
             }
-
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -77,6 +77,7 @@ class _GerenciarDoacaoState extends State<GerenciarDoacao> {
     );
 
     return Scaffold(
+      key: _gbKeyScaffold,
       drawer: DrawerDraw(),
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBarTransparente('Doação Item'),
