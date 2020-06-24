@@ -22,13 +22,7 @@ Widget returnLogoApp(
             : Padding(
                 padding:
                     EdgeInsets.only(top: paddingTitle ?? 50.0 ?? paddingTitle),
-                child: ShaderMask(
-                  blendMode: BlendMode.srcIn,
-                  shaderCallback: (Rect bounds) {
-                    return LinearGradient(
-                      colors: [Colors.blue, Colors.green],
-                    ).createShader(bounds);
-                  },
+                child: LinearGradientItens(
                   child: Text(
                     'Help Others',
                     style: TextStyle(
@@ -70,8 +64,8 @@ Widget returnLogoApp(
 /// ```
 /// {@end-tool}
 
-Widget textFormFieldFactory(
-    String desc, String tipo, double scrHeight, IconData icone, bool password, TextEditingController controller,
+Widget textFormFieldFactory(String desc, String tipo, double scrHeight,
+    IconData icone, bool password, TextEditingController controller,
     {Function validator, double borderRadius, IconData suffixIcon}) {
   return Container(
     padding: EdgeInsets.all(16),

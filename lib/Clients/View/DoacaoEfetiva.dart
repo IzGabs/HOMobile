@@ -44,7 +44,8 @@ class _State extends State<DoacaoEfetiva> {
   Future<void> _getDonates() async {
     List<Map> donates = await controllerAPI.getDonates(token);
     listaperecivel = donates.where((element) => element['tipo'] == 'perecivel');
-    listaNaoperecivel = donates.where((element) => element['tipo'] == 'perecivel');
+    listaNaoperecivel =
+        donates.where((element) => element['tipo'] == 'perecivel');
   }
 
   @override
@@ -120,9 +121,6 @@ class _State extends State<DoacaoEfetiva> {
     );
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     final _sendBtn = Padding(
@@ -164,27 +162,26 @@ class _State extends State<DoacaoEfetiva> {
         ),
       ),
     );
-    Widget _perecivel (List<Map> x){
+    Widget _perecivel(List<Map> x) {
       LinearGradientItens(
         child: Card(
           child: ListTile(
             leading: Icon(Icons.arrow_forward),
             title: Text("Escolher..."),
-          //  onTap: _selProd(),
+            //  onTap: _selProd(),
           ),
         ),
       );
       Align(alignment: Alignment.bottomCenter, child: _sendBtn);
     }
 
-
-    Widget _naoperecivel(List<Map> x){
+    Widget _naoperecivel(List<Map> x) {
       LinearGradientItens(
         child: Card(
           child: ListTile(
             leading: Icon(Icons.arrow_forward),
             title: Text("Escolher..."),
-          //  onTap: _selProd(),
+            //  onTap: _selProd(),
           ),
         ),
       );
@@ -202,14 +199,13 @@ class _State extends State<DoacaoEfetiva> {
           actions: [
             LinearGradientItens(
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/DoacaoGeral');
-                  },
-                  color: Colors.blue,
-                  iconSize: 35,
-                )
-              )
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pushNamed(context, '/DoacaoGeral');
+              },
+              color: Colors.blue,
+              iconSize: 35,
+            ))
           ],
           centerTitle: true,
           title: LinearGradientItens(
@@ -247,13 +243,13 @@ class _State extends State<DoacaoEfetiva> {
           child: new TabBarView(
             ///PageStorageKey
             children: [
-               _perecivel(listaperecivel),
-               _naoperecivel(listaNaoperecivel),
+              _perecivel(listaperecivel),
+              _naoperecivel(listaNaoperecivel),
             ],
           ),
         ),
-        /// se sobrar tempo animar essa kenga
 
+        /// se sobrar tempo animar essa kenga
       ),
     );
   }

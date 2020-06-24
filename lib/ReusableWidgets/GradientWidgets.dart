@@ -7,6 +7,7 @@ class LinearGradientItens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
+      blendMode: BlendMode.srcIn,
       shaderCallback: (Rect bounds) {
         return LinearGradient(
           colors: [Colors.blue, Colors.green],
@@ -16,4 +17,3 @@ class LinearGradientItens extends StatelessWidget {
     );
   }
 }
-

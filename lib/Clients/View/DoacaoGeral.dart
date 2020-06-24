@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:help_others/Clients/Controller/ClientController.dart';
+import 'package:help_others/ReusableWidgets/CommonsWidgetsMethods.dart';
 import 'package:help_others/ReusableWidgets/DrawerDraw.dart';
 import 'package:help_others/ReusableWidgets/GradientWidgets.dart';
 import 'package:help_others/main.dart';
@@ -214,10 +215,21 @@ class InfoDonate extends StatelessWidget {
     final InfoDonate args = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Info Doacao'),
+      appBar: new AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.green),
+            onPressed: () => Navigator.pop(context)),
+        centerTitle: true,
+        title: LinearGradientItens(
+            child: Text(
+          'Info Doação',
+          style: TextStyle(color: Colors.white),
+        )),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.white,
         onPressed: () async {
           String x =
               await controllerAPI.reservarDoacao(args.info['url'], token);
@@ -284,28 +296,61 @@ class InfoDonate extends StatelessWidget {
           }
           Navigator.popUntil(context, ModalRoute.withName('/ClientHomePage'));
         },
-        label: Text('Eu quero'),
-        icon: Icon(Icons.thumb_up),
+        label: LinearGradientItens(child: Text('Eu quero')),
+        icon: LinearGradientItens(child: Icon(Icons.thumb_up)),
       ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Item: ' + args.info['item'],
+            returnLogoApp(
+              60.0,
+              5.0,
+              25,
+              true,
+              paddingTitle: 10,
             ),
-            Text(
-              'Tipo: ' + args.info['tipo'],
-            ),
-            Text(
-              'Ponto de Coleta: ' + args.info['endereco'],
-            ),
+            SizedBox(height: 50),
+            Wrap(
+              direction: Axis.vertical,
+              children: [
+                _itemCreate(
+                  'Item: ' + args.info['item'],
+                ),
+                _itemCreate(
+                  'Tipo: ' + args.info['tipo'],
+                ),
+                _itemCreate(
+                  'Endereço: ' + args.info['endereco'],
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
   }
+}
+
+Widget _itemCreate(String desc) {
+  return Card(
+    elevation: 5,
+    shape: OutlineInputBorder(
+        borderSide: BorderSide.none, borderRadius: BorderRadius.circular(40)),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      child: LinearGradientItens(
+        child: Text(
+          desc,
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+              fontFamily: 'Balsamiq'),
+        ),
+      ),
+    ),
+  );
 }
 
 /*
